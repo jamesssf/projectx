@@ -1,3 +1,7 @@
 This log acts as a official tracker of work done by the collaborators.
 
 1/13/2019 design 3d part for eye piece which holds camera - JS
+
+1/16/2019 printed 3d part, put together battery circuit, on/off/switch, and wires for buttons.
+
+need to program GPIO buttons, solder on/offswitch, start pupil tracking.
