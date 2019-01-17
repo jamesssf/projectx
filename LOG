@@ -5,3 +5,10 @@ This log acts as a official tracker of work done by the collaborators.
 1/16/2019 printed 3d part, put together battery circuit, on/off/switch, and wires for buttons.
 
 need to program GPIO buttons, solder on/offswitch, start pupil tracking.
+
+Began implementation of circular hough transform (CHT) to track the center of the pupil. - NP
+
+Created a module named simplecam.py that would print my webcam feed and draw the hough
+circles on the video feed.  The module needs better biasing, it is detecting far too many circles
+that are not the pupil. This might not be a problem when the camera is right on the eye, 
+need to test on the raspi. - NP
