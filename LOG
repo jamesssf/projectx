@@ -12,3 +12,5 @@ Created a module named simplecam.py that would print my webcam feed and draw the
 circles on the video feed.  The module needs better biasing, it is detecting far too many circles
 that are not the pupil. This might not be a problem when the camera is right on the eye, 
 need to test on the raspi. - NP
+
+1/17/19 wroked on filters for pupil detection algoriithm
