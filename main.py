@@ -5,12 +5,19 @@ from PIL import Image, ImageDraw, ImageFont
 import traceback
 import textwrap
 import time
+import RPi.GPIO as GPIO
+
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(7, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(18, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(23, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(27, GPIO.OUT)
 
 
 def book():
-    book_file = open('sample.txt', 'r')
-    book = book_file.read()
-    book_text = textwrap.wrap(book, 30) # word wraps for the size of font and screen
+    book_open = open('sample.txt', 'r')
+    book_file = book_open.read()
+    book_text = textwrap.wrap(book_file, 30) # word wraps for the size of font and screen
 
     return book_text
 
@@ -39,14 +46,29 @@ def main():
     index = 0
     epd.init()
     epd.Clear(0xFF)
-    option = input("next page = 0\n"
-                   "exit = 1\n: ")
     text = book()
-    while option < 1:
-        if option == 0:
+
+    while True:
+        lights = GPIO.input(27)  # status of lights
+        input_state_7 = GPIO.input(7)  # Bottom Button
+        input_state_18 = GPIO.input(18)  # Middle Button
+        input_state_23 = GPIO.input(23)  # Top Button DONT REPROGRAM
+        if not input_state_7:
+            break
+        if not input_state_18:
             index = write_to_display(text, index, epd)
-            option = int(input("Turn the page? "))
+            time.sleep(0.2)
+        if not input_state_23:
+            if lights == 1:
+                GPIO.output(27, 0)
+            else:
+                GPIO.output(27, 1)
+            time.sleep(0.2)
+
     epd.init()
     epd.Clear(0xFF)
+    GPIO.output(27, 0)
+
 
 main()
+
