@@ -1,0 +1,36 @@
+Clone the 2018-11-13-raspbian-stretch-lite.img to the SD card
+
+put wpa_supplicant.conf in boot directory
+
+
+                  ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+              update_config=1
+              country=US
+
+              network={
+              ssid="projectx"
+              psk="eeee2020"
+              scan_ssid=1
+              }
+
+              network={
+              ssid="University of Washington"
+              key_mgmt=NONE
+              scan_ssid=1
+              }
+             
+put a file with no extension in the boot called ssh
+
+open windows command prompt
+
+ssh pi@raspberrypi.local
+
+type yes to accept connection
+
+use default password 
+    raspberry
+    
+sudo passwd pi
+        ee2020
+        ee2020
+        
