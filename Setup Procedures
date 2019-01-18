@@ -38,4 +38,15 @@ Installed gstreamer via sudo apt-get install gstreamer1.0-tools
 
 sudo apt-get update && sudo apt-get upgrade
 
+to ssh over bluetooth do the following
+    sudo systemctl start hciuart
+    sudo bluetoothctl
+          agent on
+          default-agent
+          scan on
+          pair --put bt address here
+          trust --same as above
+          
+          
 
+    
