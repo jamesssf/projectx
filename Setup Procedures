@@ -34,3 +34,4 @@ sudo passwd pi
         ee2020
         ee2020
         
+Installed gstreamer via sudo apt-get install gstreamer1.0-tools
