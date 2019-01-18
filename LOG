@@ -13,4 +13,4 @@ circles on the video feed.  The module needs better biasing, it is detecting far
 that are not the pupil. This might not be a problem when the camera is right on the eye, 
 need to test on the raspi. - NP
 
-1/17/19 wroked on filters for pupil detection algoriithm
+1/17/19 wroked on filters for pupil detection algorithm - NP
