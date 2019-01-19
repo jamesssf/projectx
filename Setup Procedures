@@ -83,6 +83,7 @@ command to re-access the cv  virtual environment,
 otherwise you’ll be using the system version of Python instead.
 if os use : $ source ~/.profile and $ workon cv
 
+screen bash
 pip install numpy
 cmake -D CMAKE_BUILD_TYPE=RELEASE \
     -D CMAKE_INSTALL_PREFIX=/usr/local \
@@ -93,6 +94,5 @@ cmake -D CMAKE_BUILD_TYPE=RELEASE \
     -D OPENCV_ENABLE_NONFREE=ON \
     -D INSTALL_PYTHON_EXAMPLES=OFF \
     -D BUILD_EXAMPLES=OFF ..
-screen bash
 make
   
