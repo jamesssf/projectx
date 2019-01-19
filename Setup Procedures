@@ -3,7 +3,7 @@ Clone the 2018-11-13-raspbian-stretch-lite.img to the SD card
 put wpa_supplicant.conf in boot directory
 
 
-                  ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+              ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
               update_config=1
               country=US
 
@@ -64,13 +64,19 @@ wget https://bootstrap.pypa.io/get-pip.py
 sudo python get-pip.py
 sudo pip install virtualenv virtualenvwrapper
 sudo rm -rf ~/.cache/pip
+sudo nano /home/pi/.profile
+      # virtualenv and virtualenvwrapper
+      export WORKON_HOME=$HOME/.virtualenvs
+      source /usr/local/bin/virtualenvwrapper.sh
+sudo reboot
+source ~/.profile
+mkvirtualenv cv -p python3
 
+If you ever reboot your system, logout and log back in, 
+or open up a new terminal, you’ll need to use the workon
+command to re-access the cv  virtual environment, 
+otherwise you’ll be using the system version of Python instead.
+if os use : $ source ~/.profile and $ workon cv
 
-
-
-
-
-
-
-
+pip install numpy
 
