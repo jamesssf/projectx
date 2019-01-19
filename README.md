@@ -1,4 +1,3 @@
 # projectx
-Ereader glasses
 
-
+E-Reader Glasses!
