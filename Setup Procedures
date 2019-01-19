@@ -47,7 +47,10 @@ to ssh over bluetooth do the following
           pair --put bt address here
           trust --same as above
 
+https://www.pyimagesearch.com/2017/09/04/raspbian-stretch-install-opencv-3-python-on-your-raspberry-pi/
+
 sudo raspi-config
+	extend filesystem
           
 sudo rpi-update
 sudo reboot
@@ -85,6 +88,9 @@ if os use : $ source ~/.profile and $ workon cv
 
 screen bash
 pip install numpy
+cd OpenCV-4.0.1
+mkdir build
+cd build
 cmake -D CMAKE_BUILD_TYPE=RELEASE \
     -D CMAKE_INSTALL_PREFIX=/usr/local \
     -D OPENCV_EXTRA_MODULES_PATH=~/opencv_contrib-4.0.1/modules \
