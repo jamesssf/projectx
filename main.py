@@ -49,7 +49,7 @@ def main():
     text = book()
 
     while True:
-        lights = GPIO.input(27)  # status of lights
+        lights = GPIO.output(27)  # status of lights
         input_state_7 = GPIO.input(7)  # Bottom Button
         input_state_18 = GPIO.input(18)  # Middle Button
         input_state_23 = GPIO.input(23)  # Top Button DONT REPROGRAM
