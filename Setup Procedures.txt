@@ -42,6 +42,8 @@ sudo pip3 install spidev
 sudo pip3 install RPi.GPIO
 sudo pip3 install Pillow
 sudo apt-get install ttf-mscorefonts-installer
+sudo update-alternatives --install /usr/bin/python python /usr/bin/python2.7 1
+sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.5 2
 git clone https://github.com/jamesssf/projectx.git
 git pull origin master
 
