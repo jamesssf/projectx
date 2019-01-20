@@ -34,6 +34,15 @@ sudo passwd pi
         ee2020
         ee2020
         
+
+sudo apt-get install git
+sudo apt-get install python3-pip
+sudo apt-get install python-imaging
+sudo pip3 install spidev
+sudo pip3 install RPi.GPIO
+sudo pip3 install Pillow
+git clone 
+
 Installed gstreamer via sudo apt-get install gstreamer1.0-tools
 
 sudo apt-get update && sudo apt-get upgrade
@@ -47,7 +56,16 @@ to ssh over bluetooth do the following
           pair --put bt address here
           trust --same as above
 
+https://www.pyimagesearch.com/2017/09/04/raspbian-stretch-install-opencv-3-python-on-your-raspberry-pi/
+
+https://yoursunny.com/t/2018/install-OpenCV3-PiZero/
+
+https://pypi.org/project/opencv-python/
+
+https://www.life2coding.com/install-opencv-3-4-0-python-3-raspberry-pi-3/
+
 sudo raspi-config
+	extend filesystem
           
 sudo rpi-update
 sudo reboot
@@ -85,6 +103,13 @@ if os use : $ source ~/.profile and $ workon cv
 
 screen bash
 pip install numpy
+<<<<<<< HEAD
+=======
+cd OpenCV-4.0.1
+mkdir build
+cd build
   
 cmake -D CMAKE_BUILD_TYPE=RELEASE \ -D CMAKE_INSTALL_PREFIX=/usr/local \ -D BUILD_opencv_java=OFF \ -D BUILD_opencv_python2=OFF \ -D BUILD_opencv_python3=ON \ -D PYTHON_DEFAULT_EXECUTABLE=$(which python3) \ -D INSTALL_C_EXAMPLES=OFF \ -D INSTALL_PYTHON_EXAMPLES=ON \ -D BUILD_EXAMPLES=ON\ -D OPENCV_EXTRA_MODULES_PATH=~/opencv_contrib-3.4.0/modules \ -D WITH_CUDA=OFF \ -D BUILD_TESTS=OFF \ -D BUILD_PERF_TESTS= OFF ..
+
+make
 
