@@ -50,7 +50,9 @@ sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.5 2
 git clone https://github.com/jamesssf/projectx.git
 git pull origin master
 
-Installed gstreamer via sudo apt-get install gstreamer1.0-tools
+sudo apt-get install gstreamer1.0-tools
+sudo apt-get install gstreamer1.0-plugins-bad
+**edit IP address in start_stream.sh
 
 sudo apt-get update && sudo apt-get upgrade
 
