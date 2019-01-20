@@ -34,7 +34,10 @@ sudo passwd pi
         ee2020
         ee2020
         
-
+sudo raspi-config
+	enable camera
+	enable SPI
+	enable Serial
 sudo apt-get install git
 sudo apt-get install python3-pip
 sudo apt-get install python-imaging
