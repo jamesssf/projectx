@@ -41,7 +41,7 @@ sudo apt-get install python-imaging
 sudo pip3 install spidev
 sudo pip3 install RPi.GPIO
 sudo pip3 install Pillow
-git clone 
+git clone https://github.com/jamesssf/projectx.git
 
 Installed gstreamer via sudo apt-get install gstreamer1.0-tools
 
