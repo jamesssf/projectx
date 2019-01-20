@@ -13,6 +13,8 @@ GPIO.setup(18, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(23, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(27, GPIO.OUT)
 
+GPIO.output(27, 0)
+
 
 def book():
     book_open = open('sample.txt', 'r')
@@ -49,7 +51,7 @@ def main():
     text = book()
 
     while True:
-        lights = GPIO.output(27)  # status of lights
+        lights = GPIO.input(27)  # status of lights
         input_state_7 = GPIO.input(7)  # Bottom Button
         input_state_18 = GPIO.input(18)  # Middle Button
         input_state_23 = GPIO.input(23)  # Top Button DONT REPROGRAM
