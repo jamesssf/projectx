@@ -29,7 +29,7 @@ def write_to_display(text, index_counter, epd):
     line_counter = 1    # Determines how many lines to read
     image = Image.new('1', (epd2in13d.EPD_HEIGHT, epd2in13d.EPD_WIDTH), 255)  # 255: clear the frame
     draw = ImageDraw.Draw(image)
-    font = ImageFont.truetype('/usr/share/fonts/truetype/noto/NotoMono-Regular.ttf', 12)
+    font = ImageFont.truetype('/usr/share/fonts/truetype/msttcorefonts/georgia.ttf', 12)
     for line in text[index_counter:]:   # iterate through the text
         if line_counter < 7:
             draw.text((2, draw_counter), line, font=font, fill=0)
