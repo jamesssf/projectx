@@ -3,17 +3,23 @@
 import epd2in13d
 from PIL import Image, ImageDraw, ImageFont
 import traceback
+from gpiozero import Button, LED
 import textwrap
 import time
-import RPi.GPIO as GPIO
+#import RPi.GPIO as GPIO
 
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(7, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.setup(18, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.setup(23, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.setup(27, GPIO.OUT)
+led = LED(27)
+top_button = Button(23)
+middle_button = Button(18)
+bottom_button = Button(7)
 
-GPIO.output(27, 0)
+#GPIO.setmode(GPIO.BCM)
+#GPIO.setup(7, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+#GPIO.setup(18, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+#GPIO.setup(23, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+#GPIO.setup(27, GPIO.OUT)
+
+#GPIO.output(27, 0)
 
 
 def book():
@@ -45,35 +51,35 @@ def write_to_display(text, index_counter, epd):
 
 def main():
     epd = epd2in13d.EPD()
-    index = 0
+  #  index = 0
     epd.init()
     epd.Clear(0xFF)
-    text = book()
+  #  text = book()
 
     while True:
-        lights = GPIO.input(27)  # status of lights
-        print("Get LED state successful")
-        input_state_7 = GPIO.input(7)  # Bottom Button
-        print("Get bottom button state successful")
-        input_state_18 = GPIO.input(18)  # Middle Button
-        print("Get middle button state successful")
-        input_state_23 = GPIO.input(23)  # Top Button DONT REPROGRAM
-        print("Get top button state successful")
-        if not input_state_7:
-            print("Exit")
-            break
-        if not input_state_18:
-            print("Turn Page")
-            index = write_to_display(text, index, epd)
-            time.sleep(0.2)
-        if not input_state_23:
-            if lights == 1:
-                print("Lights on")
-                GPIO.output(27, 0)
-            else:
-                print("Lights off")
-                GPIO.output(27, 1)
-            time.sleep(0.2)
+        top_button.wait_for_press()
+        led.toggle()
+        sleep(.5)
+
+        # lights = GPIO.input(27)  # status of lights
+        # input_state_7 = GPIO.input(7)  # Bottom Button
+        # input_state_18 = GPIO.input(18)  # Middle Button
+        # input_state_23 = GPIO.input(23)  # Top Button DONT REPROGRAM
+        # if not input_state_7:
+        #     print("Exit")
+        #     break
+        # if not input_state_18:
+        #     print("Turn Page")
+        #     index = write_to_display(text, index, epd)
+        #     time.sleep(0.2)
+        # if not input_state_23:
+        #     if lights == 1:
+        #         print("Lights on")
+        #         GPIO.output(27, 0)
+        #     else:
+        #         print("Lights off")
+        #         GPIO.output(27, 1)
+        #     time.sleep(0.2)
 
     epd.init()
     epd.Clear(0xFF)
