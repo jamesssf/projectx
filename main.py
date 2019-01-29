@@ -52,18 +52,26 @@ def main():
 
     while True:
         lights = GPIO.input(27)  # status of lights
+        print("Get LED state successful")
         input_state_7 = GPIO.input(7)  # Bottom Button
+        print("Get bottom button state successful")
         input_state_18 = GPIO.input(18)  # Middle Button
+        print("Get middle button state successful")
         input_state_23 = GPIO.input(23)  # Top Button DONT REPROGRAM
+        print("Get top button state successful")
         if not input_state_7:
+            print("Exit")
             break
         if not input_state_18:
+            print("Turn Page")
             index = write_to_display(text, index, epd)
             time.sleep(0.2)
         if not input_state_23:
             if lights == 1:
+                print("Lights on")
                 GPIO.output(27, 0)
             else:
+                print("Lights off")
                 GPIO.output(27, 1)
             time.sleep(0.2)
 
