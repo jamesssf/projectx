@@ -8,9 +8,9 @@ import time
 import RPi.GPIO as GPIO
 
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(7, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.setup(18, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.setup(23, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(7, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(18, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(23, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 GPIO.setup(27, GPIO.OUT)
 
 GPIO.output(27, 0)
@@ -55,20 +55,20 @@ def main():
         input_state_7 = GPIO.input(7)  # Bottom Button
         input_state_18 = GPIO.input(18)  # Middle Button
         input_state_23 = GPIO.input(23)  # Top Button DONT REPROGRAM
-        if not input_state_7:
+        if input_state_7:
             print("Exit")
             break
-        if not input_state_18:
+        if input_state_18:
             print("Turn Page")
             index = write_to_display(text, index, epd)
             time.sleep(0.2)
-        if not input_state_23:
+        if input_state_23:
             if lights == 1:
                 print("Lights on")
-                GPIO.output(13, 0)
+                GPIO.output(27, 1)
             else:
                 print("Lights off")
-                GPIO.output(13, 1)
+                GPIO.output(27, 0)
             time.sleep(0.2)
 
     epd.init()
