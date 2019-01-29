@@ -1,7 +1,10 @@
-from gpiozero import LED, Button
-from time import sleep
+import RPi.GPIO as GPIO
 
-led = LED(26)
-led.on()
-sleep(5)
-led.off()
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(7, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+
+
+while True:
+    input_state_7 = GPIO.input(7)  # Bottom Button
+    if input_state_7:
+        print("Exit")
