@@ -52,6 +52,7 @@ def main():
 
     while True:
         lights = GPIO.input(27)  # status of lights
+        print(lights)
         input_state_7 = GPIO.input(7)  # Bottom Button
         input_state_18 = GPIO.input(18)  # Middle Button
         input_state_23 = GPIO.input(23)  # Top Button DONT REPROGRAM
@@ -65,10 +66,10 @@ def main():
         if input_state_23:
             if lights == 1:
                 print("Lights on")
-                GPIO.output(27, 1)
+                GPIO.output(27, 0)
             else:
                 print("Lights off")
-                GPIO.output(27, 0)
+                GPIO.output(27, 1)
             time.sleep(0.2)
 
     epd.init()
