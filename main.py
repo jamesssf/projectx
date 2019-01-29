@@ -59,7 +59,7 @@ def main():
         print("Get middle button state successful")
         input_state_23 = GPIO.input(23)  # Top Button DONT REPROGRAM
         print("Get top button state successful")
-        if input_state_7:
+        if not input_state_7:
             print("Exit")
             break
         if not input_state_18:
