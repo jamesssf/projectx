@@ -13,7 +13,7 @@ GPIO.setup(18, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(16, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(13, GPIO.OUT)
 
-GPIO.output(27, 0)
+GPIO.output(13, 0)
 
 
 def book():
@@ -65,10 +65,10 @@ def main():
         if not input_state_23:
             if lights == 1:
                 print("Lights on")
-                GPIO.output(27, 0)
+                GPIO.output(13, 0)
             else:
                 print("Lights off")
-                GPIO.output(27, 1)
+                GPIO.output(13, 1)
             time.sleep(0.2)
 
     epd.init()
