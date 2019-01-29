@@ -19,7 +19,7 @@ GPIO.output(27, 0)
 def book():
     book_open = open('sample.txt', 'r')
     book_file = book_open.read()
-    book_text = textwrap.wrap(book_file, 30) # word wraps for the size of font and screen
+    book_text = textwrap.wrap(book_file, 30)  # word wraps for the size of font and screen
 
     return book_text
 
