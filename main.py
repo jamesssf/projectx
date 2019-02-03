@@ -7,14 +7,14 @@ import time
 import RPi.GPIO as GPIO
 
 
-GPIO.setmode(GPIO.BOARD)
-GPIO.setup(16, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.setup(12, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.setup(26, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.setup(13, GPIO.OUT)
-GPIO.output(13, GPIO.HIGH)
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(23, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(18, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(7, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(27, GPIO.OUT)
+GPIO.output(27, GPIO.HIGH)
 time.sleep(3)
-GPIO.output(13, GPIO.LOW)
+GPIO.output(27, GPIO.LOW)
 
 def book():
     book_open = open('sample.txt', 'r')
@@ -53,9 +53,9 @@ def main():
 
     while True:
         lights = GPIO.input(27)  # status of lights
-        input_state_7 = GPIO.input(26)  # Bottom Button
-        input_state_18 = GPIO.input(12)  # Middle Button
-        input_state_23 = GPIO.input(16)  # Top Button DONT REPROGRAM
+        input_state_7 = GPIO.input(7)  # Bottom Button
+        input_state_18 = GPIO.input(18)  # Middle Button
+        input_state_23 = GPIO.input(23)  # Top Button DONT REPROGRAM
         if not input_state_7:
             print("Exit")
             break
@@ -66,15 +66,15 @@ def main():
         if not input_state_23:
             if lights == 1:
                 print("Lights on")
-                GPIO.output(13, GPIO.HIGH)
+                GPIO.output(27, GPIO.HIGH)
             else:
                 print("Lights off")
-                GPIO.output(13, GPIO.LOW)
+                GPIO.output(27, GPIO.LOW)
             time.sleep(0.2)
 
     epd.init()
     epd.Clear(0xFF)
-    GPIO.output(13, GPIO.LOW)
+    GPIO.output(27, GPIO.LOW)
 
 
 main()
