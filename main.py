@@ -2,19 +2,19 @@
 
 import epd2in13d
 from PIL import Image, ImageDraw, ImageFont
-import traceback
 import textwrap
 import time
 import RPi.GPIO as GPIO
 
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(7, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-GPIO.setup(18, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-GPIO.setup(23, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-GPIO.setup(27, GPIO.OUT)
 
-GPIO.output(27, 0)
-
+GPIO.setmode(GPIO.BOARD)
+GPIO.setup(16, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(12, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(26, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(13, GPIO.OUT)
+GPIO.output(13, GPIO.HIGH)
+time.sleep(3)
+GPIO.output(13, GPIO.LOW)
 
 def book():
     book_open = open('sample.txt', 'r')
@@ -50,31 +50,31 @@ def main():
     epd.Clear(0xFF)
     text = book()
 
+
     while True:
         lights = GPIO.input(27)  # status of lights
-        print(lights)
-        input_state_7 = GPIO.input(7)  # Bottom Button
-        input_state_18 = GPIO.input(18)  # Middle Button
-        input_state_23 = GPIO.input(23)  # Top Button DONT REPROGRAM
-        if input_state_7:
+        input_state_7 = GPIO.input(26)  # Bottom Button
+        input_state_18 = GPIO.input(12)  # Middle Button
+        input_state_23 = GPIO.input(16)  # Top Button DONT REPROGRAM
+        if not input_state_7:
             print("Exit")
             break
-        if input_state_18:
+        if not input_state_18:
             print("Turn Page")
             index = write_to_display(text, index, epd)
             time.sleep(0.2)
-        if input_state_23:
+        if not input_state_23:
             if lights == 1:
                 print("Lights on")
-                GPIO.output(27, 0)
+                GPIO.output(13, GPIO.HIGH)
             else:
                 print("Lights off")
-                GPIO.output(27, 1)
+                GPIO.output(13, GPIO.LOW)
             time.sleep(0.2)
 
     epd.init()
     epd.Clear(0xFF)
-    GPIO.output(27, 0)
+    GPIO.output(13, GPIO.LOW)
 
 
 main()
