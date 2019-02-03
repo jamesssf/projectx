@@ -62,7 +62,7 @@ def main():
             index = write_to_display(text, index, epd)
             time.sleep(0.2)
         if not input_state_23:
-            if lights == 1:
+            if lights == 0:
                 print("Lights on")
                 GPIO.output(27, GPIO.HIGH)
             else:
