@@ -6,13 +6,13 @@ import textwrap
 import time
 import RPi.GPIO as GPIO
 
-
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(23, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(18, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(22, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(27, GPIO.OUT)
 GPIO.output(27, GPIO.LOW)
+
 
 def book():
     book_open = open('sample.txt', 'r')
@@ -23,12 +23,12 @@ def book():
 
 
 def write_to_display(text, index_counter, epd):
-    draw_counter = 0    # Determines the Y coordinate where to draw the line on the screen
-    line_counter = 1    # Determines how many lines to read
+    draw_counter = 0  # Determines the Y coordinate where to draw the line on the screen
+    line_counter = 1  # Determines how many lines to read
     image = Image.new('1', (epd2in13d.EPD_HEIGHT, epd2in13d.EPD_WIDTH), 255)  # 255: clear the frame
     draw = ImageDraw.Draw(image)
     font = ImageFont.truetype('/usr/share/fonts/truetype/msttcorefonts/georgia.ttf', 12)
-    for line in text[index_counter:]:   # iterate through the text
+    for line in text[index_counter:]:  # iterate through the text
         if line_counter < 7:
             draw.text((2, draw_counter), line, font=font, fill=0)
             index_counter += 1
@@ -38,7 +38,7 @@ def write_to_display(text, index_counter, epd):
     draw.text((184, 92), 'EXIT', font=font, fill=0)
     epd.display(epd.getbuffer(image))
 
-    return index_counter    # Keeps track of the index from the list
+    return index_counter  # Keeps track of the index from the list
 
 
 def main():
@@ -47,7 +47,6 @@ def main():
     epd.init()
     epd.Clear(0xFF)
     text = book()
-
 
     while True:
         lights = GPIO.input(27)  # status of lights
@@ -76,4 +75,3 @@ def main():
 
 
 main()
-
