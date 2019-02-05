@@ -16,7 +16,7 @@ GPIO.output(27, GPIO.LOW)
 time.sleep(30)
 
 def book():
-    book_open = open('sample.txt', 'r')
+    book_open = open('/home/pi/projectx/sample.txt', 'r')
     book_file = book_open.read()
     book_text = textwrap.wrap(book_file, 30)  # word wraps for the size of font and screen
 
