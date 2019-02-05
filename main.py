@@ -13,6 +13,7 @@ GPIO.setup(22, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(27, GPIO.OUT)
 GPIO.output(27, GPIO.LOW)
 
+time.sleep(30)
 
 def book():
     book_open = open('sample.txt', 'r')
