@@ -5,6 +5,8 @@ from PIL import Image, ImageDraw, ImageFont
 import textwrap
 import time
 import RPi.GPIO as GPIO
+from subprocess import call
+
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(23, GPIO.IN, pull_up_down=GPIO.PUD_UP)
@@ -72,6 +74,7 @@ def main():
     epd.init()
     epd.Clear(0xFF)
     GPIO.output(27, GPIO.LOW)
+    call("sudo shutdown -h now", shell=True)
 
 
 main()
