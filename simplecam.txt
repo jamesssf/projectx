@@ -4,13 +4,21 @@ This module is a test module, however many of the functions in the module are su
 up in a future final version
 
 def showcam() - Print the camera, and launch the pupildetect function.
+Takes the average of 2 frames pupil to smooth detection
+Prints the detected pupil location
 return null
 
-def pupildetect(img, maxInt) - find the pupil with CHT
+def pupildetect(img) - find the pupil with CHT
 img - the captured image from the camera
-maxInt - the maximum intensity of a pixel to be detected by
-the cht algorithm.  Currently this can be raised or lowerd with
-the plus or minus key and starts at the highest intensity, eg there
-is no bias
+Detects all the circles in the image and takes the average
+Currentyl very accurate, although there are false detections
+THat show up once every 2 seconds at most, usually not very frequently
+return the x y and r of the circle for that frame
 
-This program is currently not working, it detects the eye probably 1/100~1000 times
+draw(img, x, y, r)
+img - the image to be drawn on from camera
+x, y, r - Circle information
+Draws circles on the image
+
+Currently medium to high accuracy, can be improved, although it might
+be good to apply stochastic models to pupil detection.
