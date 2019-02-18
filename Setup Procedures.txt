@@ -52,6 +52,7 @@ git pull origin master
 
 sudo apt-get install gstreamer1.0-tools
 sudo apt-get install gstreamer1.0-plugins-bad
+sudo apt-get install gstreamer1.0_libav
 
 sudo chmod +x start_stream.sh
 **edit IP address in start_stream.sh
