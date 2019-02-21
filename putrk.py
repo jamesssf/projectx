@@ -46,9 +46,7 @@ def crds():
 # hough circles printed on it
 def pupildetect(img):
     # Blurs the image to make it easier to detect
-    print("Trying to blur")
     blur_img = cv2.medianBlur(img, 5)
-    print("blur done")
     # Turn the image greyscale
     grey_img = cv2.cvtColor(blur_img, cv2.COLOR_BGR2GRAY)
     # Binary threshold (source, threshold, white color, type)
