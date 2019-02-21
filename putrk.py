@@ -14,7 +14,6 @@ def crds():
     time.sleep(0.1)
     # Loop pupil detection and print webcam
     framecount = 0
-    frameav = 1
     ax = 0
     ay = 0
     ar = 0
@@ -33,8 +32,10 @@ def crds():
 
         # run pupil detection algorithm
         fcrds = pupildetect(img)
-        print(str(fcrds[0]) + " " + str(fcrds[1]))
-        cv2.imwrite("img.jpg", img)
+        print(str(fcrds[0]) + " " + str(fcrds[1]) + str(fcrds[2]))
+        if fcrds[0] != 0 and fcrds[1] != 0 and fcrds[2] != 0:
+            cv2.imwrite(img, filename="img" + str(framecount))
+            framecount+=1
         # quit the webcam at esc
         if cv2.waitKey(1) == 27:
             break  # esc to quit
@@ -56,7 +57,7 @@ def pupildetect(img):
     try:
         # Create hough cricles
         circles = cv2.HoughCircles(image, cv2.HOUGH_GRADIENT, 1, 20,
-                                   param1=10, param2=30, minRadius=60, maxRadius=75)
+                                   param1=10, param2=30, minRadius=30, maxRadius=7-)
         circles = numpy.uint16(numpy.around(circles))
         # Holds a group of circles to find an average
         # find average circle positions
