@@ -2,11 +2,15 @@ import cv2
 import numpy
 import time
 from picamera import PiCamera
+from picamera.array import PiRGBArray
 
 def crds():
     # Capture the camera feed
     cam = PiCamera()
-    rawCapture = PiRGBArray(camera)
+    cam.resolution = (640, 480)
+    cam.framerate = 32
+    rawCapture = PiRGBArray(cam, size=(640,480))
+    # Warm up
     time.sleep(0.1)
     # Loop pupil detection and print webcam
     framecount = 0
@@ -14,10 +18,10 @@ def crds():
     ax = 0
     ay = 0
     ar = 0
-    while True:
+    #capture the camera
+    for frame in cam.capture_continuous(rawCapture, format="bgr", use_video_port=True)
         # Take each image from the webcam
-        cam.capture(rawCapture, format="bgr")
-        img = rawCapture.array
+        img = frame.array
 
         ####TEST CODE####
         #ret_val, img = cam.read()
@@ -40,6 +44,7 @@ def crds():
         # quit the webcam at esc
         if cv2.waitKey(1) == 27:
             break  # esc to quit
+        rawCapture.truncate(0)
     # close the window
     cv2.destroyAllWindows()
 
