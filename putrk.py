@@ -19,7 +19,7 @@ def crds():
     ay = 0
     ar = 0
     #capture the camera
-    for frame in cam.capture_continuous(rawCapture, format="bgr", use_video_port=True)
+    for frame in cam.capture_continuous(rawCapture, format="bgr", use_video_port=True):
         # Take each image from the webcam
         img = frame.array
 
@@ -33,20 +33,12 @@ def crds():
 
         # run pupil detection algorithm
         fcrds = pupildetect(img)
-        if framecount > frameav and fcrds[0] != 0 and fcrds[1] != 0 and fcrds[2] != 0:
-            ax = numpy.uint16(numpy.around(numpy.average(fcrds[0])))
-            ay = numpy.uint16(numpy.around(numpy.average(fcrds[1])))
-            ar = numpy.uint16(numpy.around(numpy.average(fcrds[2])))
-            print(str(ax) + " " + str(ay))
-            framecount = 0
-        elif fcrds[0] != 0 and fcrds[1] != 0 and fcrds[2] != 0:
-            framecount += 1
+        print(str(fcrds[0]) + " " + str(fcrds[1]))
+        cv2.imwrite("img.jpg", img)
         # quit the webcam at esc
         if cv2.waitKey(1) == 27:
             break  # esc to quit
         rawCapture.truncate(0)
-    # close the window
-    cv2.destroyAllWindows()
 
 # Pupil detection algorithm
 # Img, the source of the image
@@ -54,7 +46,9 @@ def crds():
 # hough circles printed on it
 def pupildetect(img):
     # Blurs the image to make it easier to detect
+    print("Trying to blur")
     blur_img = cv2.medianBlur(img, 5)
+    print("blur done")
     # Turn the image greyscale
     grey_img = cv2.cvtColor(blur_img, cv2.COLOR_BGR2GRAY)
     # Binary threshold (source, threshold, white color, type)
