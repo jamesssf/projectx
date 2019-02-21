@@ -54,6 +54,9 @@ sudo apt-get install gstreamer1.0-tools
 sudo apt-get install gstreamer1.0-plugins-bad
 sudo apt-get install gstreamer1.0_libav
 
+
+sudo apt-get install python-picamera python3-picamera
+
 sudo chmod +x start_stream.sh
 **edit IP address in start_stream.sh
 sudo ./start_stream.sh
