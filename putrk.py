@@ -1,9 +1,10 @@
 import cv2
 import numpy
+from picamera import PiCamera
 
 def crds():
     # Capture the camera feed
-    cam = cv2.VideoCapture('test6.h264')
+    cam = PiCamera()
     # Loop pupil detection and print webcam
     framecount = 0
     frameav = 1
@@ -76,8 +77,8 @@ def pupildetect(img):
     except:
         return 0, 0, 0
 
-
-
+def main():
+    crds()
 
 if __name__ == '__main__':
-    main()
+        main()
