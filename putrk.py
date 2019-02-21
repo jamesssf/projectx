@@ -6,6 +6,7 @@ from picamera import PiCamera
 def crds():
     # Capture the camera feed
     cam = PiCamera()
+    rawCapture = PiRGBArray(camera)
     time.sleep(0.1)
     # Loop pupil detection and print webcam
     framecount = 0
