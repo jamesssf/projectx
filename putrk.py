@@ -1,10 +1,12 @@
 import cv2
 import numpy
+import time
 from picamera import PiCamera
 
 def crds():
     # Capture the camera feed
     cam = PiCamera()
+    time.sleep(0.1)
     # Loop pupil detection and print webcam
     framecount = 0
     frameav = 1
@@ -13,7 +15,8 @@ def crds():
     ar = 0
     while True:
         # Take each image from the webcam
-        ret_val, img, = cam.read()
+        cam.capture(rawCapture, format="bgr")
+        img = rawCapture.array
 
         ####TEST CODE####
         #ret_val, img = cam.read()
