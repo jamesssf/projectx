@@ -17,3 +17,10 @@ need to test on the raspi. - NP
 
 2/16/19 - Finished pupil detection script simplecam.py  that displays the camera feed with
 circles drawn on the pupils and also prints the locations of the center of the puils.  Works about 90% of the time at least.  More information in readme
+
+2/21/19 - Implemented my algorithm in simplecam into a new python script called putrk.py
+Putrk finds the center of the eye and prints it.  It also has the optional ability of
+saving an image of the eye with the circle printed over the pupil for trouble shooting.
+Next I need to figure out a way to use the coordiantes of the eye with the e-paper to
+turn the page with the eye.  I am thinking of designating a maximum eye position and
+when the eye goes past it for a certain amount of time it switches the page.
