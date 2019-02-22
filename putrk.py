@@ -4,47 +4,20 @@ import time
 from picamera import PiCamera
 from picamera.array import PiRGBArray
 
+# crds
+
 def crds():
-    # Capture the camera feed
-    cam = PiCamera()
-    cam.resolution = (640, 480)
-    cam.framerate = 32
-    rawCapture = PiRGBArray(cam, size=(640,480))
-    # Warm up
-    time.sleep(0.1)
-    # Loop pupil detection and print webcam
-    framecount = 0
-    ax = 0
-    ay = 0
-    ar = 0
-    #capture the camera
-    for frame in cam.capture_continuous(rawCapture, format="bgr", use_video_port=True):
-        # Take each image from the webcam
-        img = frame.array
 
-        ####TEST CODE####
-        #ret_val, img = cam.read()
-        #grey_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-        #ret_val1, img1 = cam.read()
-        #grey_img1 = cv2.cvtColor(img1, cv2.COLOR_BGR2GRAY)
-        #img_diff = cv2.subtract(grey_img, grey_img1)
-        #result = not numpy.any(img_diff)
 
-        # run pupil detection algorithm
-        fcrds = pupildetect(img)
-        print(str(fcrds[0]) + " " + str(fcrds[1]) + str(fcrds[2]))
-        if fcrds[0] != 0 and fcrds[1] != 0 and fcrds[2] != 0:
-            cv2.imwrite(img, filename="img" + str(framecount))
-            framecount+=1
-        # quit the webcam at esc
-        if cv2.waitKey(1) == 27:
-            break  # esc to quit
-        rawCapture.truncate(0)
-
-# Pupil detection algorithm
-# Img, the source of the image
-# returns the webcam image with
-# hough circles printed on it
+# Uses the Hough Transform
+# To find the position of the pupil,
+# Takes the average of all pupils detected
+# in a single frame
+# return avx, avy, avr
+# avx, avy - The averagehorizontal and vertical position
+# of the pupil as detected
+# avr - the radius of the detected circle
+# Returns all zeros if there is no circle detected.
 def pupildetect(img):
     # Blurs the image to make it easier to detect
     blur_img = cv2.medianBlur(img, 5)
@@ -53,11 +26,11 @@ def pupildetect(img):
     # Binary threshold (source, threshold, white color, type)
     # Currently using trunc that turns values over threshold pure white
     ret, thresh_img = cv2.threshold(grey_img, 60, 255, cv2.THRESH_TRUNC)
-    image = cv2.add(thresh_img, numpy.array([50.0]))
+    # image = cv2.add(thresh_img, numpy.array([50.0]))
     try:
         # Create hough cricles
         circles = cv2.HoughCircles(image, cv2.HOUGH_GRADIENT, 1, 20,
-                                   param1=10, param2=30, minRadius=30, maxRadius=7-)
+                                   param1=10, param2=30, minRadius=50, maxRadius=75)
         circles = numpy.uint16(numpy.around(circles))
         # Holds a group of circles to find an average
         # find average circle positions
@@ -80,7 +53,31 @@ def pupildetect(img):
         return 0, 0, 0
 
 def main():
-    crds()
+    # Capture the camera feed
+    cam = PiCamera()
+    # count the images
+    pcount = 0
+    # Lower this to increase performance?
+    cam.resolution = (640, 480)
+    cam.framerate = 32
+    rawCapture = PiRGBArray(cam, size=(640,480))
+    # Warm up
+    time.sleep(0.1)
+    #capture the camera
+    for frame in cam.capture_continuous(rawCapture, format="bgr", use_video_port=True):
+        # Capture the image from the picamera
+        img = frame.array
+        # run pupil detection algorithm
+        fcrds = pupildetect(img)
+        # print the position and radius of the pupil
+        print(str(fcrds[0]) + " " + str(fcrds[1]) + str(fcrds[2]))
+        if fcrds[0] != 0 and fcrds[1] != 0 and fcrds[2] != 0:
+            cv2.imwrite(img, filename="file"+ str(pcount) + ".jpg")
+            pcount += 1
+        # quit the webcam at esc
+        if cv2.waitKey(1) == 27:
+            break  # esc to quit
+        rawCapture.truncate(0)
 
 if __name__ == '__main__':
         main()
