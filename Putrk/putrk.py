@@ -46,7 +46,7 @@ def pupildetect(img):
     try:
         # Create hough cricles
         circles = cv2.HoughCircles(image, cv2.HOUGH_GRADIENT, 1, 20,
-                                   param1=10, param2=30, minRadius=40, maxRadius=60)
+                                   param1=10, param2=30, minRadius=40, maxRadius=55)
         circles = numpy.uint16(numpy.around(circles))
         # Holds a group of circles to find an average
         # find average circle positions
