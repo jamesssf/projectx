@@ -52,9 +52,9 @@ def main():
 
     while True:
         lights = GPIO.input(27)  # status of lights
-        input_state_7 = GPIO.input(22)  # Bottom Button
-        input_state_18 = GPIO.input(18)  # Middle Button
-        input_state_23 = GPIO.input(23)  # Top Button DONT REPROGRAM
+        input_state_7 = GPIO.input(36)  # Bottom Button
+        input_state_18 = GPIO.input(38)  # Middle Button
+        input_state_23 = GPIO.input(40)  # Top Button DONT REPROGRAM
         if not input_state_7:
             print("Exit")
             break
