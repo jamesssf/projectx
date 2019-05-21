@@ -129,5 +129,16 @@ cmake -D CMAKE_BUILD_TYPE=RELEASE \ -D CMAKE_INSTALL_PREFIX=/usr/local \ -D BUIL
 
 make
 
-Install Circuit python
+Feather E-Paper Installation
+
+1. Install Circuit python
 https://learn.adafruit.com/circuitpython-on-raspberrypi-linux/installing-circuitpython-on-raspberry-pi
+
+2. Adafruit EPD 
+sudo pip3 install adafruit-circuitpython-epd
+
+3. Bus Device
+sudo pip3 install adafruit-circuitpython-busdevice
+
+4. framebuf
+sudo pip3 install adafruit-circuitpython-framebuf
